@@ -54,13 +54,14 @@
  			`real_estate`
  		WHERE
  			<![CDATA[
-        	`area` > #{area}
+        	`area` >= #{area}
         	]]>
         AND
         	<![CDATA[
-        	`price` < #{price}
+        	`price` <= #{price}
         	]]>
         ORDER BY
         	`createdAt`
+        DESC
  	</select>
  </mapper>
