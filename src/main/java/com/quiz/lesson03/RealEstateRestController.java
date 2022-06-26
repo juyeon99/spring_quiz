@@ -16,16 +16,19 @@ public class RealEstateRestController {
 	@Autowired
 	private RealEstateBO realEstateBO;
 	
+	// http://localhost:8080/lesson03/quiz01/1?id=20
 	@RequestMapping("/lesson03/quiz01/1")
 	public RealEstate quiz01_1(@RequestParam(value="id") int id) {
 		return realEstateBO.getRealEstateById(id);
 	}
 	
+	// http://localhost:8080/lesson03/quiz01/2?rent_price=90
 	@RequestMapping("/lesson03/quiz01/2")
 	public List<RealEstate> quiz01_2(@RequestParam(value="rent_price", required=true) int rent_price) {
 		return realEstateBO.getRealEstateByRentPrice(rent_price);
 	}
 	
+	// http://localhost:8080/lesson03/quiz01/3?area=90&price=130000
 	@RequestMapping("/lesson03/quiz01/3")
 	public List<RealEstate> quiz01_3(
 			@RequestParam(value="area", required=true) int area

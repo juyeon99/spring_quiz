@@ -60,6 +60,8 @@
         	<![CDATA[
         	`price` <= #{price}
         	]]>
+        AND
+        	`type` = "매매"
         ORDER BY
         	`createdAt`
         DESC
