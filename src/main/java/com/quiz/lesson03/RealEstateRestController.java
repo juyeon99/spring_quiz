@@ -35,4 +35,24 @@ public class RealEstateRestController {
 			,@RequestParam(value="price", required=true) int price) {
 		return realEstateBO.getRealEstateByAreaAndPrice(area, price);
 	}
+	
+	@RequestMapping("/lesson03/quiz02/1")
+	public String quiz02_1(){
+		RealEstate re = new RealEstate();
+		re.setRealtorId(3);
+		re.setAddress("푸르지용 리버 303동 1104호");
+		re.setArea(89);
+		re.setType("매매");
+		re.setPrice(100000);
+		
+		int row = realEstateBO.addRealEstate(re);
+		return row > 0 ? row + "행 입력 성공" : "실패";
+	}
+	
+	// http://localhost:8080/lesson03/quiz02/2?realtor_id=5
+	@RequestMapping("/lesson03/quiz02/2")
+	public String quiz02_2(@RequestParam(value="realtor_id", required=true) int realtorId){
+		int row = realEstateBO.addRealEstateAsField(realtorId,"썅떼빌리버 오피스텔 814호",45,"월세",100000,120);
+		return row > 0 ? row + "행 입력 성공" : "실패";
+	}
 }
