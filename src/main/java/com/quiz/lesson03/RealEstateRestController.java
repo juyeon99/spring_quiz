@@ -36,6 +36,7 @@ public class RealEstateRestController {
 		return realEstateBO.getRealEstateByAreaAndPrice(area, price);
 	}
 	
+	// http://localhost:8080/lesson03/quiz02/1
 	@RequestMapping("/lesson03/quiz02/1")
 	public String quiz02_1(){
 		RealEstate re = new RealEstate();
@@ -54,5 +55,21 @@ public class RealEstateRestController {
 	public String quiz02_2(@RequestParam(value="realtor_id", required=true) int realtorId){
 		int row = realEstateBO.addRealEstateAsField(realtorId,"썅떼빌리버 오피스텔 814호",45,"월세",100000,120);
 		return row > 0 ? row + "행 입력 성공" : "실패";
+	}
+	
+	// http://localhost:8080/lesson03/quiz03?id=8&price=70000
+	@RequestMapping("/lesson03/quiz03")
+	public String quiz03(
+			@RequestParam(value="id", required=true) int id,
+			@RequestParam(value="price", required=true) int price){
+		int row = realEstateBO.updateRealEstateById(id, price);
+		return row > 0 ? row + "행 수정 성공" : "수정 실패";
+	}
+	
+	// http://localhost:8080/lesson03/quiz04?id=21
+	@RequestMapping("/lesson03/quiz04")
+	public String quiz04(@RequestParam(value="id", required=true) int id) {
+		int row = realEstateBO.deleteRealEstateById(id);
+		return row > 0 ? row + "행 삭제 성공" : "삭제 실패";
 	}
 }
