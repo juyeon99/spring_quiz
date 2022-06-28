@@ -120,6 +120,7 @@
  		SET
  			`price` = #{price}
  			,`updatedAt` = NOW()
+ 			,`type` = "전세"
  		WHERE
  			`id` = #{id}
  	</update>
