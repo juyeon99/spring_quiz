@@ -11,6 +11,6 @@ public interface SellerDAO {
 
 	public Seller selectLatestSeller();
 
-	public Seller selectSellerById(int id);
-
+//	public Seller selectSellerById(int id);
+	public Seller selectSellerById(Integer id);
 }
