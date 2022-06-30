@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Lesson04 Quiz02 - Seller info</title>
+<title>Lesson04 Quiz02 - Realtor info</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -13,11 +13,30 @@
 </head>
 <body>
 	<div class="container">
-		<h1>${title}</h1>
+		<h1>공인중개사 정보</h1>
 		
-		<img src="${result.profileImageUrl}" width="300" height="300"><br>
-		<span style="font-size:50px;">${result.nickname}</span><br>
-		<strong style="font-size:30px;color: gold;">${result.temperature}</strong><br>
+		<table class="table">
+			<tr>
+				<th>ID</th>
+				<td>${result.id}</td>
+			</tr>
+			<tr>
+				<th>상호명</th>
+				<td>${result.office}</td>
+			</tr>
+			<tr>
+				<th>전화번호</th>
+				<td>${result.phoneNumber}</td>
+			</tr>
+			<tr>
+				<th>주소</th>
+				<td>${result.address}</td>
+			</tr>
+			<tr>
+				<th>등급</th>
+				<td>${result.grade}</td>
+			</tr>
+		</table>
 		
 	</div>
 </body>

@@ -2,13 +2,14 @@ package com.quiz.lesson04;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.quiz.lesson04.bo.RealtorBO;
-import com.quiz.lesson04.model.Seller;
+import com.quiz.lesson04.model.Realtor;
 
 @RequestMapping("/lesson04")
 @Controller
@@ -25,8 +26,18 @@ public class RealtorController {
 	
 	// http://localhost:8080/lesson04/realtor_info
 	@PostMapping("/realtor_info")
-	public String realtorInfo() {
+	public String realtorInfo(
+			@ModelAttribute Realtor realtor,
+			Model model) {
 		
+		// insert
+		realtorBO.addRealtor(realtor);
+		
+		// select
+		realtor = realtorBO.getRealtor(realtor.getId());
+		
+		// Model
+		model.addAttribute("result", realtor);
 		
 		return "lesson04/realtorInfo";
 	}
