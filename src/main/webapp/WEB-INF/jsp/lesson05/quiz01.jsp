@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Lesson05 Ex01 - JSTL</title>
+<title>Lesson05 Quiz01 - JSTL</title>
 </head>
 <body>
 
