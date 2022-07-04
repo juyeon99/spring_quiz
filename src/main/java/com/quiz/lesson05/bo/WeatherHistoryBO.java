@@ -18,4 +18,8 @@ public class WeatherHistoryBO {
 		return weatherHistoryDAO.selectWeatherHistoryList();
 	}
 
+	public void addWeatherHistory(WeatherHistory wh) {
+		weatherHistoryDAO.insertWeatherHistory(wh);
+	}
+
 }

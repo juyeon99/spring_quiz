@@ -25,15 +25,16 @@
 <body>
 <div class="container d-flex">
 	<nav class="col-2 d-flex flex-column">
-		<img src="/img/meteo_logo.png"/>
+		<a href="https://www.kma.go.kr/kma/"><img src="/img/meteo_logo.png"/></a>
 		<a href="#">날씨</a>
-		<a href="#">날씨입력</a>
+		<!-- <a href="insert_weather.jsp">날씨입력</a> -->
+		<jsp:forward page="insert_weather.jsp">날씨입력</jsp:forward>
 		<a href="#">테마날씨</a>
 		<a href="#">관측 기후</a>
 	</nav>
 	
 	<div class="col-10">
-	<h2>과거 날씨</h2>
+	<h2 style="margin:10px;">과거 날씨</h2>
 	<table class="table text-center">
 		<thead>
 			<tr>
@@ -73,6 +74,16 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	</div>
+</div>
+
+<div class="container d-flex">
+	<div class="col-2">
+		<img src="/img/meteo_logo.png" style="width:130px; margin:10px; filter: grayscale(100%); opacity: 0.7;"/>
+	</div>
+	<div style="margin:10px; color:gray;">
+		<small>(07062) 서울시 동작구 여의대방로16길 61</small><br>
+		<small>Copyright©2020 KMA. All Rights RESERVED.</small>
 	</div>
 </div>
 	

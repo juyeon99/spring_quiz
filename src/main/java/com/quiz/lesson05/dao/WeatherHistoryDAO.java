@@ -11,4 +11,6 @@ public interface WeatherHistoryDAO {
 
 	public List<WeatherHistory> selectWeatherHistoryList();
 
+	public void insertWeatherHistory(WeatherHistory wh);
+
 }
