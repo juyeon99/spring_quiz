@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+nav{
+    background-color: aqua;
+    font-weight: bold;
+    font-size: large;
+}
+
+nav a{
+	color: white;
+	margin-top: 10px;
+}
+
+nav img{
+	width:100px;
+	align-self: center;
+	margin:10px;
+}

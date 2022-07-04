@@ -16,7 +16,7 @@ import com.quiz.lesson04.model.Realtor;
 public class RealtorController {
 	
 	@Autowired
-	public RealtorBO realtorBO;
+	private RealtorBO realtorBO;
 	
 	// http://localhost:8080/lesson04/add_realtor
 	@RequestMapping(path = "/add_realtor", method = RequestMethod.GET)
