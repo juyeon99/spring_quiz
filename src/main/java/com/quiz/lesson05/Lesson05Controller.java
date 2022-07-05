@@ -1,5 +1,7 @@
 package com.quiz.lesson05;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -9,12 +11,16 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.quiz.lesson04.model.Seller;
+import com.quiz.lesson02.bo.StoreBO;
+import com.quiz.lesson02.model.Store;
+import com.quiz.lesson05.bo.NewReviewBO;
 import com.quiz.lesson05.bo.WeatherHistoryBO;
+import com.quiz.lesson05.model.NewReview;
 import com.quiz.lesson05.model.WeatherHistory;
 
 @Controller
@@ -187,11 +193,12 @@ public class Lesson05Controller {
 		return "lesson05/quiz04";
 	}
 	
+	
 	@Autowired
 	private WeatherHistoryBO weatherHistoryBO;
 	
-	// http://localhost:8080/lesson05/past_weather
-	@RequestMapping("/lesson05/past_weather")
+	// http://localhost:8080/lesson05/5/past_weather
+	@RequestMapping("/lesson05/5/past_weather")
 	public String quiz05_past_weather(Model model) {
 		// select from db
 		List<WeatherHistory> weatherList = weatherHistoryBO.getWeatherHistoryList();
@@ -200,10 +207,16 @@ public class Lesson05Controller {
 		return "lesson05/past_weather";
 	}
 	
-	// http://localhost:8080/lesson05/add_weather
-	@PostMapping("/lesson05/add_weather")
+	// http://localhost:8080/lesson05/5/add_weather_view
+	@RequestMapping("/lesson05/5/add_weather_view")
+	public String quiz05_add_weather_view() {
+		return "lesson05/insert_weather";
+	}
+	
+	// http://localhost:8080/lesson05/5/add_weather
+	@PostMapping("/lesson05/5/add_weather")
 	public String quiz05_add_weather(
-			@RequestParam("date") Date date,
+			@RequestParam("date") String date,
 			@RequestParam("weather") String weather,
 			@RequestParam("temperatures") double temperatures,
 			@RequestParam("precipitation") double precipitation,
@@ -211,7 +224,14 @@ public class Lesson05Controller {
 			@RequestParam("windSpeed") double windSpeed) {
 		
 		WeatherHistory wh = new WeatherHistory();
-		wh.setDate(date);
+		Date d;
+		try {
+			d = new SimpleDateFormat("yyyy년 MM월 dd일").parse(date);
+			wh.setDate(d);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
 		wh.setWeather(weather);
 		wh.setTemperatures(temperatures);
 		wh.setPrecipitation(precipitation);
@@ -219,7 +239,38 @@ public class Lesson05Controller {
 		wh.setWindSpeed(windSpeed);
 		weatherHistoryBO.addWeatherHistory(wh);
 		
-		return "lesson05/past_weather";
+		return "redirect:past_weather";
 	}
+	
+	
+	@Autowired
+	private StoreBO storeBO;
+	
+	// http://localhost:8080/lesson05/6/store
+	@RequestMapping("/lesson05/6/store")
+	public String quiz06_store(Model model) {
+		// select from db
+		List<Store> storeList = storeBO.getStoreList();
+		model.addAttribute("storeList", storeList);
+		
+		return "lesson05/stores";
+	}
+	
+	@Autowired
+	private NewReviewBO newReviewBO;
+
+	// http://localhost:8080/lesson05/6/reviews?storeId=3&storeName=BHC
+	@GetMapping("/lesson05/6/reviews")
+	public String quiz06_reviews(Model model,
+			@RequestParam(value="storeId") int storeId,
+			@RequestParam(value="storeName") String storeName) {
+		// select from db
+		List<NewReview> reviewList = newReviewBO.getReviewListById(storeId);
+		model.addAttribute("storeName", storeName);
+		model.addAttribute("reviewList", reviewList);
+		
+		return "lesson05/reviews";
+	}
+	
 	
 }

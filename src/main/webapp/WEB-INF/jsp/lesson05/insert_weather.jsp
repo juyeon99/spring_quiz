@@ -18,9 +18,9 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 <!-- datepicker -->
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 
 <!-- css -->
 	<link rel="stylesheet" href="/css/lesson05/quiz05_style01.css" type="text/css">
@@ -37,7 +37,7 @@
 	
 	<div class="col-10">
 		<h2 style="margin:20px;">날씨 입력</h2>
-        <form method="post" action="/lesson05/add_weather">
+        <form method="post" action="/lesson05/5/add_weather">
             <div class="d-flex justify-content-between">
                 <div class="d-flex" style="align-items: center;">
                     날짜 <input type="text" id="date" name="date" class="form-control" style="width: 250px; margin:10px;">

@@ -24,11 +24,12 @@
 </head>
 <body>
 <div class="container d-flex">
+
+	<%-- 메뉴 영역 ul(nav), li(nav-item), a(nav-link) --%>
 	<nav class="col-2 d-flex flex-column">
 		<a href="https://www.kma.go.kr/kma/"><img src="/img/meteo_logo.png"/></a>
 		<a href="#">날씨</a>
-		<!-- <a href="insert_weather.jsp">날씨입력</a> -->
-		<jsp:forward page="insert_weather.jsp">날씨입력</jsp:forward>
+		<a href="add_weather_view">날씨입력</a>
 		<a href="#">테마날씨</a>
 		<a href="#">관측 기후</a>
 	</nav>

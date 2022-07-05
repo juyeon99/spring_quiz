@@ -27,9 +27,9 @@
  			#{date}
  			,#{weather}
  			,#{temperatures}
- 			,${precipitation}
- 			,${microDust}
- 			,${windSpeed}
+ 			,#{precipitation}
+ 			,#{microDust}
+ 			,#{windSpeed}
  			, NOW()
  			, NOW()
  		)
