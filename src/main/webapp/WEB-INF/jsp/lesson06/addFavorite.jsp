@@ -16,7 +16,7 @@
 	<div class="container">
 		<h1>즐겨찾기 추가하기</h1>
 		
-		<form method="post" action="/lesson06/add_user">
+		<form method="post" action="/lesson06/1/add_favorite">
 			<div class="form-group">
 				<label for="name">제목</label>
 				<input type="text" id="name" name="name" class="form-control">

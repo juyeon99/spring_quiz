@@ -28,8 +28,6 @@
 			</tr>
 		</thead>
 		<tbody>
-			<!-- 자기소개의 내용을 15자까지 표시하세요.
-			자기소개가 15자가 넘어 갈경우 뒤에 ... 을 표시하세요. -->
 			<c:forEach var="member" items="${membersList}" varStatus="status">
 				<tr>
 					<td>${status.count}</td>

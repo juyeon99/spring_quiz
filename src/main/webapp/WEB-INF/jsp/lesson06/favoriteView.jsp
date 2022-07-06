@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,8 +18,25 @@
 <body>
 	<div class="container">
 		<h1>즐겨찾기 목록</h1>
-		
+		<table class="table">
+			<thead>
+				<tr>
+					<th>No.</th>
+					<th>이름</th>
+					<th>주소</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="link" items="${favList}" varStatus="status">
+					<tr>
+						<%-- <td>${link.id}</td> --%>
+						<td>${status.count}</td>
+						<td>${link.name}</td>
+						<td>${link.url}</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
 	</div>
-	
 </body>
 </html>

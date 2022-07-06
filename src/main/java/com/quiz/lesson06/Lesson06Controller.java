@@ -7,7 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.quiz.lesson02.model.Store;
 import com.quiz.lesson06.bo.FavoriteBO;
 import com.quiz.lesson06.model.Favorite;
 
@@ -26,6 +28,7 @@ public class Lesson06Controller {
 	
 	// 유저 추가
 	// http://localhost:8080/lesson06/1/add_favorite
+	@ResponseBody
 	@RequestMapping("/1/add_favorite")
 	public String addUser(
 			@RequestParam("name") String name,
@@ -43,8 +46,7 @@ public class Lesson06Controller {
 	// http://localhost/lesson06/1/favorite_view
 	@RequestMapping("/1/favorite_view")
 	public String favoriteView(Model model) {
-		
-		// select db
+		// select from db
 		List<Favorite> favList = favoriteBO.getFavList();
 		model.addAttribute("favList", favList);
 		
