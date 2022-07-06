@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -217,6 +219,7 @@ public class Lesson05Controller {
 	@PostMapping("/lesson05/5/add_weather")
 	public String quiz05_add_weather(
 			@RequestParam("date") String date,
+//			@RequestParam("date") @DateTimeFormat("yyyy-mm-dd") Date date,
 			@RequestParam("weather") String weather,
 			@RequestParam("temperatures") double temperatures,
 			@RequestParam("precipitation") double precipitation,
@@ -271,6 +274,5 @@ public class Lesson05Controller {
 		
 		return "lesson05/reviews";
 	}
-	
 	
 }

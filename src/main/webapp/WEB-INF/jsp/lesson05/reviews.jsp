@@ -22,43 +22,50 @@
 <div class="wrap">
 	<h3 class="bg-info" style="color:white; padding:20px; width:500px;">배탈의 민족</h3>
 	<h1>${storeName}-리뷰</h1>
-	<c:forEach var="review" items="${reviewList}">
-		<div class="box">
-			<strong>${review.userName}</strong>
-			<img src="/img/star_fill.png"> 
-			<c:choose>
-				<c:when test="${review.point == 1.0}">
-					<img src="/img/star_empty.png"><img src="/img/star_empty.png"><img src="/img/star_empty.png"><img src="/img/star_empty.png">
-				</c:when>
-				<c:when test="${review.point == 1.5}">
-					<img src="/img/star_half.png"><img src="/img/star_empty.png"><img src="/img/star_empty.png"><img src="/img/star_empty.png">
-				</c:when>
-				<c:when test="${review.point == 2.0}">
-					<img src="/img/star_fill.png"><img src="/img/star_empty.png"><img src="/img/star_empty.png"><img src="/img/star_empty.png">
-				</c:when>
-				<c:when test="${review.point == 2.5}">
-					<img src="/img/star_fill.png"><img src="/img/star_half.png"><img src="/img/star_empty.png"><img src="/img/star_empty.png">
-				</c:when>
-				<c:when test="${review.point == 3.0}">
-					<img src="/img/star_fill.png"><img src="/img/star_fill.png"><img src="/img/star_empty.png"><img src="/img/star_empty.png">
-				</c:when>
-				<c:when test="${review.point == 3.5}">
-					<img src="/img/star_fill.png"><img src="/img/star_fill.png"><img src="/img/star_half.png"><img src="/img/star_empty.png">
-				</c:when>
-				<c:when test="${review.point == 4.0}">
-					<img src="/img/star_fill.png"><img src="/img/star_fill.png"><img src="/img/star_fill.png"><img src="/img/star_empty.png">
-				</c:when>
-				<c:when test="${review.point == 4.5}">
-					<img src="/img/star_fill.png"><img src="/img/star_fill.png"><img src="/img/star_fill.png"><img src="/img/star_half.png">
-				</c:when>
-				<c:otherwise>
-					<img src="/img/star_fill.png"><img src="/img/star_fill.png"><img src="/img/star_fill.png"><img src="/img/star_fill.png">
-				</c:otherwise>
-			</c:choose>
-			<small></small><br>
-			<small></small>
-		</div>
-	</c:forEach>
+	<c:if test="${fn:length(reviewList) eq 0}">
+		<br><h3 class="text-center">작성된 리뷰가 없습니다.</h3><br>
+	</c:if>
+	<c:if test="${fn:length(reviewList) > 0}">
+		<c:forEach var="review" items="${reviewList}">
+			<div class="box">
+				<strong>${review.userName} </strong>
+				<c:choose>
+					<c:when test="${review.point == 1.0}">
+						<img src="/img/star_fill.png"><img src="/img/star_empty.png"><img src="/img/star_empty.png"><img src="/img/star_empty.png"><img src="/img/star_empty.png">
+					</c:when>
+					<c:when test="${review.point == 1.5}">
+						<img src="/img/star_fill.png"><img src="/img/star_half.png"><img src="/img/star_empty.png"><img src="/img/star_empty.png"><img src="/img/star_empty.png">
+					</c:when>
+					<c:when test="${review.point == 2.0}">
+						<img src="/img/star_fill.png"><img src="/img/star_fill.png"><img src="/img/star_empty.png"><img src="/img/star_empty.png"><img src="/img/star_empty.png">
+					</c:when>
+					<c:when test="${review.point == 2.5}">
+						<img src="/img/star_fill.png"><img src="/img/star_fill.png"><img src="/img/star_half.png"><img src="/img/star_empty.png"><img src="/img/star_empty.png">
+					</c:when>
+					<c:when test="${review.point == 3.0}">
+						<img src="/img/star_fill.png"><img src="/img/star_fill.png"><img src="/img/star_fill.png"><img src="/img/star_empty.png"><img src="/img/star_empty.png">
+					</c:when>
+					<c:when test="${review.point == 3.5}">
+						<img src="/img/star_fill.png"><img src="/img/star_fill.png"><img src="/img/star_fill.png"><img src="/img/star_half.png"><img src="/img/star_empty.png">
+					</c:when>
+					<c:when test="${review.point == 4.0}">
+						<img src="/img/star_fill.png"><img src="/img/star_fill.png"><img src="/img/star_fill.png"><img src="/img/star_fill.png"><img src="/img/star_empty.png">
+					</c:when>
+					<c:when test="${review.point == 4.5}">
+						<img src="/img/star_fill.png"><img src="/img/star_fill.png"><img src="/img/star_fill.png"><img src="/img/star_fill.png"><img src="/img/star_half.png">
+					</c:when>
+					<c:otherwise>
+						<img src="/img/star_fill.png"><img src="/img/star_fill.png"><img src="/img/star_fill.png"><img src="/img/star_fill.png"><img src="/img/star_fill.png">
+					</c:otherwise>
+				</c:choose><br>
+				<small style="color: gray;"><fmt:formatDate value="${review.createdAt}" pattern="yyyy년 MM월 dd일"/></small><br>
+				${review.review}<br>
+				<div class="menu">
+					${review.menu}
+				</div>
+			</div>
+		</c:forEach>
+	</c:if>
 	<hr>
 	<footer>
 		<strong>(주)우와한형제</strong><br>

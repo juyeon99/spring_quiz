@@ -2,8 +2,11 @@ package com.quiz.lesson05.model;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class WeatherHistory {
 	private int id;
+//	private @DateTimeFormat(pattern = "yyyy-mm-dd") Date date;	//(Controller에서 Model로 받을 경우 need formatter for model to notice the date type)
 	private Date date;
 	private String weather;
 	private double temperatures;
