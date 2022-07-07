@@ -16,7 +16,7 @@
 	<div class="container">
 		<h1>즐겨찾기 추가하기</h1>
 		
-		<form method="post" action="/lesson06/1/add_favorite">
+		<!-- <form method="post" action="/lesson06/1/add_favorite"> -->
 			<div class="form-group">
 				<label for="name">제목</label>
 				<input type="text" id="name" name="name" class="form-control">
@@ -27,8 +27,8 @@
 				<input type="text" id="url" name="url" class="form-control">
 			</div>
 			
-			<input type="button" id="addBtn" class="btn btn-success col-12" value="추가">	
-		</form>
+			<input type="button" id="addBtn" class="btn btn-success btn-block" value="추가">	<!-- btn-block = w-100 = col-12 -->
+		<!-- </form> -->
 	</div>
 	
 <script>
@@ -36,7 +36,7 @@
 		$('#addBtn').on('click', function(){
 			// validation 유효성 체크
 			let name = $('#name').val().trim();
-			if(name == ''){
+			if(name.length < 1){
 				alert('제목을 입력하세요.');
 				return;
 			}
@@ -47,19 +47,25 @@
 				return;
 			}
 			
+			if(url.startsWith("http") === false && !url.startsWith("https")){
+				alert('주소 형식이 잘못 되었습니다.');
+				return;
+			}
+			
 			$.ajax({
 				// request
 				type:"POST"
 				,url:"/lesson06/1/add_favorite"
 				,data:{"name":name, "url":url}
 				
-				// response
-				,success:function(data){
-					alert(data);
-					location.href="/lesson06/1/favorite_view";
-				}
-				,complete:function(){
-					alert("완료");
+				// response		"{"result":"success"}"
+				,success:function(data){	// json str을 object로 변환해줌
+					// alert(data.result);
+					// alert(data.result_code);
+					if(data.result == "success"){
+						alert("입력 성공");
+						location.href="/lesson06/1/favorite_view";	// AJAX: 수동 request		// get 방식
+					}
 				}
 				,error:function(e){
 					alert("error :" + e);
