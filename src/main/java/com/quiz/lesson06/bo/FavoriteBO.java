@@ -25,5 +25,9 @@ public class FavoriteBO {
 	public List<Favorite> getFavList() {
 		return favoriteDAO.selectFavList();
 	}
+
+	public boolean existingUrl(String url) {
+		return favoriteDAO.existingUrl(url);
+	}
 	
 }
