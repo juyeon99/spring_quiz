@@ -19,7 +19,6 @@
  			, NOW()
  		)
 	</insert> -->
-	
 	<insert id="insertFavorite" parameterType="map">
 		INSERT INTO `favorite`
  		(
@@ -44,12 +43,32 @@
  			`favorite`
 	</select>
 	
-	<select id="existingUrl" parameterType="string" resultType="boolean">
+	<!-- <select id="existingUrl" parameterType="string" resultType="boolean">
 		SELECT
  			COUNT(1)
 		FROM
 			`favorite`
 		WHERE 
 			`url` = #{url}
+	</select> -->
+	<select id="selectFavoriteByUrl" parameterType="string" resultType="com.quiz.lesson06.model.Favorite">
+		SELECT
+			`id`
+ 			,`name`
+ 			,`url`
+ 			,`createdAt`
+ 			,`updatedAt`
+		FROM
+			`favorite`
+		WHERE 
+			`url` = #{url}
 	</select>
+	
+	<delete id="deleteFavoriteById" parameterType="int">
+		DELETE
+		FROM
+			`favorite`
+		WHERE
+			`id` = #{id}
+	</delete>
 </mapper>

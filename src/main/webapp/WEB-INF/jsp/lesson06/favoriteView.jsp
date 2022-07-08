@@ -23,20 +23,68 @@
 				<tr>
 					<th>No.</th>
 					<th>이름</th>
-					<th>주소</th>
+					<th colspan="2">주소</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="link" items="${favList}" varStatus="status">
+				<c:forEach var="favorite" items="${favList}" varStatus="status">
 					<tr>
-						<%-- <td>${link.id}</td> --%>
-						<td>${status.count}</td>
-						<td>${link.name}</td>
-						<td>${link.url}</td>
+						<td>${favorite.id}</td>
+						<!-- <td>${status.count}</td> -->
+						<td>${favorite.name}</td>
+						<td>${favorite.url}</td>
+						<td>
+							<%-- (1) name 속성과 value 속성을 이용해서 동적으로 삭제 감지 (권장 안함) (value는 하나 밖에 담지 못하기 때문) --%>
+							<!-- <button type="button" name="delBtn" value="${favorite.id}" class="del-btn btn btn-danger">삭제</button> -->
+							
+							<%-- (2) data를 이용해서 태그에 data를 임시저장 (권장됨) --%>
+							<%-- 'data-' + name(should not be camel case!)	ex) data-fav-id, data-fav-name value와 다르게 여러개 사용 가능!--%>
+							<button type="button" class="del-btn btn btn-danger" data-favorite-id="${favorite.id}">삭제</button>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
+	
+<script>
+$(document).ready(function(){
+	// (1) name 속성과 value 속성을 이용해서 동적으로 삭제 감지 (권장 안함)
+	/* $('button[name=delBtn]').on('click',function(e){
+		// let id = $(this).attr('value');
+		
+		let id = e.target.value;
+		alert(id);
+	}); */
+	
+	// (2) data를 이용해서 태그에 data를 임시저장
+	// 태그: data-favorite-id		'data-' 뒤에는 우리가 이름을 정함.(But no camel case)
+	// 스크립트: $(this).data('favorite-id'); => 태그에 심은 값을 꺼냄
+	$('.del-btn').on('click',function(){
+		let delId = $(this).data('favorite-id');	// 'data-'를 제외한 이름
+		
+		$.ajax({
+			// request
+			type:"POST"			// better to use POST method to hide info
+			,url:"/lesson06/delete_favorite"
+			,data:{"id":delId}
+			
+			// response
+			,success:function(data){
+				// {"result":"success"}
+				if(data.result == "success"){
+					location.reload(true);		// 삭제 후 새로고침
+				} else{
+					alert('삭제 실패. 관리자에게 문의해주세요.');
+				}
+			}
+			,error:function(e){
+				alert('통신에 실패했습니다.');
+			}
+			
+		});
+	});
+});
+</script>
 </body>
 </html>

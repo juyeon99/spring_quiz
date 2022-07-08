@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -74,15 +75,57 @@ public class Lesson06Controller {
 		return "lesson06/favoriteView";
 	}
 	
+	
+	// Method 1
+//	@GetMapping("/is_duplication")
+//	@ResponseBody
+//	public Map<String, Boolean> isDuplication(
+//			@RequestParam("url") String url){
+//		
+//		boolean isDuplication = favoriteBO.existingUrl(url);
+//		
+//		Map<String, Boolean> result = new HashMap<>();
+//		result.put("is_duplication", isDuplication);
+//		
+//		return result;
+//	}
+	
+	// Method 2
+	@PostMapping("/is_duplication")
 	@ResponseBody
-	@GetMapping("/is_duplication")
-	public Map<String, Boolean> isDuplication(
-			@RequestParam("url") String url){
-		// select from db
-		boolean isDuplication = favoriteBO.existingUrl(url);	// 중복이면 true
+	public Map<String, Boolean> isDuplicationUrl(
+			@RequestParam("url") String url) {
 		
+		// 결과를 map -> JSON string
 		Map<String, Boolean> result = new HashMap<>();
-		result.put("is_duplication", isDuplication);
+		result.put("is_duplication", false);
+		
+		// db select -> 중복 확인
+		Favorite favorite = favoriteBO.getFavoriteByUrl(url);
+		if (favorite != null) {
+			// 중복일 때
+			result.put("is_duplication", true);
+		}
+
+		return result;
+	}
+	
+	
+	// 삭제
+	// AJAX 요청 - @ResponseBody returns Map
+	@ResponseBody
+	@PostMapping("/delete_favorite")
+	public Map<String, Object> deleteFavorite(
+			@RequestParam("id") int id){
+		// delete by id
+		int deleteRow = favoriteBO.deleteFavoriteById(id);
+		
+		Map<String, Object> result = new HashMap<>();
+		if(deleteRow > 0) {
+			result.put("result", "success");
+		} else {
+			result.put("result", "failure");
+		}
 		
 		return result;
 	}
