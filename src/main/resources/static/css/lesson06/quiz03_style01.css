@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+li a{
+    color: white;
+}
+
+li a:hover{
+    color: gray;
+}
+
+.nav{
+    background-color: orange;
+}
+
+footer small{
+	color: gray;
+}
+
+.box1{
+	background-color: darkorange;
+	color: white;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box2{
+	background-color: orange;
+	color: white;
+}

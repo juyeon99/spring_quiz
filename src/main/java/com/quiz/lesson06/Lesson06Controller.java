@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.quiz.lesson06.bo.FavoriteBO;
 import com.quiz.lesson06.model.Favorite;
 
+// lesson06 quiz01,02
 @RequestMapping("/lesson06")
 @Controller
 public class Lesson06Controller {
