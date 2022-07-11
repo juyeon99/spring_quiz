@@ -106,6 +106,15 @@ $(document).ready(function(){
 		let name = $('#name').val().trim();
 		let phoneNumber = $('#phoneNumber').val();
 		
+		if(name == ''){
+			alert('이름을 입력하세요.');
+			return;
+		}
+		if(phoneNumber == ''){
+			alert('전화번호를 입력하세요.');
+			return;
+		}
+		
 		$.ajax({
 			// request
 			type:"POST"	

@@ -2,22 +2,20 @@ package com.quiz.lesson06;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.quiz.lesson05.model.WeatherHistory;
 import com.quiz.lesson06.bo.BookingBO;
 import com.quiz.lesson06.model.Booking;
 
@@ -31,8 +29,7 @@ public class Lesson06Quiz03Controller {
 	// http://localhost:8080/lesson06/3/booking_list_view
 	@RequestMapping("/booking_list_view")
 	public String bookingListView(Model model) {
-		List<Booking> bookingList = new ArrayList<>();
-		bookingList = bookingBO.getBookingList();
+		List<Booking> bookingList = bookingBO.getBookingList();
 		
 		model.addAttribute("bookingList",bookingList);
 		
@@ -41,7 +38,8 @@ public class Lesson06Quiz03Controller {
 	
 	// http://localhost:8080/lesson06/3/delete_booking
 	@ResponseBody
-	@PostMapping("/delete_booking")
+//	@PostMapping("/delete_booking")		// method 1
+	@DeleteMapping("/delete_booking")	// method 2		// POST/GET/PUT(수정)/DELETE => RESTFUL API
 	public Map<String, Object> deleteBooking(
 			@RequestParam("id") int id){
 		boolean deleted = bookingBO.deleteBookingById(id);
@@ -127,3 +125,35 @@ public class Lesson06Quiz03Controller {
 		return result;
 	}
 }
+
+/*
+ *  Request -> 서버 -> Response
+ *  	 요청방식	 응답방식
+ *  
+ *  1. 요청방식
+ *   1) GET: RequestBody가 비어있다.
+ *   	- 브라우저에서 주소치고 들어가기
+ *   	- form method="get"
+ *   	- <a href="~">
+ *   	- javascript - location.href
+ *   	- AJAX type = "GET"
+ *   
+ *   2) POST: RequestBody에 담겨서 보내진다.
+ *      - form method = "post"
+ *      - AJAX type = "POST"
+ *      
+ *  2. 응답방식
+ *   1) 결과 content type
+ *    - html
+ *    - plain/text
+ *    - json
+ *    - file
+ *    - css
+ *    - image
+ *    
+ *   2) 서버 입장
+ *    - JSP: @Controller - return String	=> jsp의 경로, Model의 매개체
+ *    			=> JSP가 해석돼서 HTML로 내려간다. text/html
+ *    - DATA (String, json, Map, Object, List, ...) => (@Controller + @ResponseBody) or @RestController
+ *    			=> data가 통째로 ResponseBody에 담긴다. Json or html(일반 글자)
+ */

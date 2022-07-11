@@ -28,7 +28,7 @@
 		<div class="d-flex justify-content-center p-3">
             <span class="display-4">통나무 펜션</span>
         </div>
-		<nav class="menu d-flex align-items-center" style="background-color:gold;">
+		<nav class="d-flex align-items-center" style="background-color:gold;">
             <ul class="nav w-100 nav-fill">
                 <li class="nav-item"><a class="nav-link font-weight-bold" href="check_reservation_view">펜션소개</a></li>
                 <li class="nav-item"><a class="nav-link font-weight-bold" href="#">객실보기</a></li>
@@ -60,12 +60,15 @@
 						<td>${booking.phoneNumber}</td>
 						<td>
 							<c:choose>
-								<c:when test="${booking.state == '대기중'}">
+								<c:when test="${booking.state eq '대기중'}">
 									<span class="text-info">${booking.state}</span>
 								</c:when>
-								<c:otherwise>
+								<c:when test="${booking.state eq'취소'}">
+									<span class="text-danger">${booking.state}</span>
+								</c:when>
+								<c:when test="${booking.state eq'확정'}">
 									<span class="text-success">${booking.state}</span>
-								</c:otherwise>
+								</c:when>
 							</c:choose>
 						</td>
 						<td>
@@ -91,14 +94,13 @@ $(document).ready(function(){
 		let delId = $(this).data('booking-id');
 		
 		$.ajax({
-			// request
-			type:"POST"	
+			// type:"POST"	// method 1
+			type:"DELETE"	// method 2
 			,url:"/lesson06/3/delete_booking"
 			,data:{"id":delId}
-			
-			// response
 			,success:function(data){
 				if(data.result == "success"){
+					alert('삭제되었습니다.');
 					location.reload(true);		// 삭제 후 새로고침
 				} else{
 					alert('삭제 실패. 관리자에게 문의해주세요.');
