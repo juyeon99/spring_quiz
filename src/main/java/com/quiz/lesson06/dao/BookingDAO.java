@@ -16,8 +16,15 @@ public interface BookingDAO {
 
 	public boolean insertBooking(Booking booking);
 
-	public Booking selectBooking(
+	// method 1
+//	public Booking selectBooking(
+//			@Param("name") String name,
+//			@Param("phoneNumber") String phoneNumber);
+	// method 2
+	public List<Booking> selectLastBookingByNameAndPhoneNumber(	
+			// It's possible that someone make reservation several times 
+			// with same name and same phone number
+			// => get the whole list with same name and phone number
 			@Param("name") String name,
 			@Param("phoneNumber") String phoneNumber);
-	
 }

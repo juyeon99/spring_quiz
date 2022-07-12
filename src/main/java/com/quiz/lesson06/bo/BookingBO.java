@@ -26,8 +26,17 @@ public class BookingBO {
 		return bookingDAO.insertBooking(booking);
 	}
 	
-	public Booking getBooking(String name, String phoneNumber) {
-		return bookingDAO.selectBooking(name,phoneNumber);
+	// method 1
+//	public Booking getBooking(String name, String phoneNumber) {
+//		return bookingDAO.selectBooking(name,phoneNumber);
+//	}
+	// method 2
+	public Booking getLastBookingByNameAndPhoneNumber(String name, String phoneNumber) {
+		List<Booking> bookingList = bookingDAO.selectLastBookingByNameAndPhoneNumber(name,phoneNumber);
+		if(bookingList.isEmpty()) {
+			return null;
+		}
+		return bookingList.get(0);		// get the last reservation someone made
 	}
 	
 }

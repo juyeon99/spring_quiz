@@ -114,21 +114,31 @@ $(document).ready(function(){
 			alert('전화번호를 입력하세요.');
 			return;
 		}
+		if(phoneNumber.startsWith("010") == false){
+			alert('010으로 시작하는 번호만 입력 가능합니다.');
+			return;
+		}
 		
 		$.ajax({
-			// request
 			type:"POST"	
 			,url:"/lesson06/3/search_booking"
 			,data:{"name":name,"phoneNumber":phoneNumber}
-			
-			// response
 			,success:function(data){
 				if(data.result == "success"){
-					alert('이름: ' + name 
+					// method 1
+					/* alert('이름: ' + name 
 							+ '\n날짜: ' + formatDate(data.date)
 							+ '\n일수: ' + data.day
 							+ '\n인원: ' + data.headcount
-							+ '\n상태: ' + data.state)
+							+ '\n상태: ' + data.state) */
+					
+					// method 2
+					alert('이름: ' + data.booking.name 
+							//+ '\n날짜: ' + formatDate(data.booking.date)
+							+ '\n날짜: ' + data.booking.date.substring(0,10)
+							+ '\n일수: ' + data.booking.day
+							+ '\n인원: ' + data.booking.headcount
+							+ '\n상태: ' + data.booking.state)
 				} else{
 					alert('예약 내역이 없습니다.');
 				}

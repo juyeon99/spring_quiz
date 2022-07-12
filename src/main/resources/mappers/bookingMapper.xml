@@ -51,7 +51,7 @@
  		)
 	</insert>
 	
-	<select id="selectBooking" parameterType="map" resultType="com.quiz.lesson06.model.Booking">
+	<!-- <select id="selectBooking" parameterType="map" resultType="com.quiz.lesson06.model.Booking">
 		SELECT
 			`headcount`
 			,`day`
@@ -60,8 +60,26 @@
 		FROM
 			`booking`
 		WHERE
-			`name`=#{name}
+			`name` = #{name}
 		AND
-			`phoneNumber`=#{phoneNumber}
+			`phoneNumber` = #{phoneNumber}
+	</select> -->
+	<select id="selectLastBookingByNameAndPhoneNumber" parameterType="map" resultType="com.quiz.lesson06.model.Booking">
+		SELECT
+			`name`
+			,`headcount`
+			,`day`
+			,`date`
+			,`phoneNumber`
+			,`state`
+ 			,`createdAt`
+ 			,`updatedAt`
+		FROM
+			`booking`
+		WHERE
+			`name`= #{name}
+		AND
+			`phoneNumber` = #{phoneNumber}
+		ORDER BY `id` DESC
 	</select>
  </mapper>

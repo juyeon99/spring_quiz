@@ -75,18 +75,20 @@
 
 <script>
 $(document).ready(function(){
-	$("#date").datepicker({
+	/* $("#date").datepicker({ */
+	$("input[name=date]").datepicker({
         dayNamesMin:["일","월","화","수","목","금","토"],
         dateFormat: "yy년 mm월 dd일",
        	minDate:0
     });
 	
 	$('#reserveBtn').on('click',function(){
+		/* let name = $('input[name=name]').val().trim(); */
 		let name = $('#name').val().trim();
-		let date = $('#date').val();
-		let day = $('#day').val();
-		let headcount = $('#headcount').val();
-		let phoneNumber = $('#phoneNumber').val();
+		let date = $('#date').val().trim();
+		let day = $('#day').val().trim();
+		let headcount = $('#headcount').val().trim();
+		let phoneNumber = $('#phoneNumber').val().trim();
 		
 		if(name == ''){
 			alert('이름을 입력하세요.');
@@ -130,7 +132,7 @@ $(document).ready(function(){
 			// response
 			,success:function(data){
 				if(data.result == "success"){
-					alert("예약되었습니다.")
+					alert("예약되었습니다.");
 					location.href="/lesson06/3/booking_list_view";
 				} else{
 					alert('예약 실패');

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -65,22 +66,24 @@ public class Lesson06Quiz03Controller {
 	@PostMapping("/reserve")
 	public Map<String, Object> reserve(
 		@RequestParam("name") String name,
-		@RequestParam("date") String date,
+//		@RequestParam("date") String date,
+		@RequestParam("date") @DateTimeFormat(pattern="yyyy년 MM월 dd일") Date date,
 		@RequestParam("day") int day,
 		@RequestParam("headcount") int headcount,
 		@RequestParam("phoneNumber") String phoneNumber) {
 		
 		// insert into db
 		Booking booking = new Booking();
-		Date d;
-		try {
-			d = new SimpleDateFormat("yyyy년 MM월 dd일").parse(date);
-			booking.setDate(d);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+//		Date d;
+//		try {
+//			d = new SimpleDateFormat("yyyy년 MM월 dd일").parse(date);
+//			booking.setDate(d);
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
 		
 		booking.setName(name);
+		booking.setDate(date);
 		booking.setDay(day);
 		booking.setHeadcount(headcount);
 		booking.setPhoneNumber(phoneNumber);
@@ -90,6 +93,7 @@ public class Lesson06Quiz03Controller {
 		Map<String, Object> result = new HashMap<>();
 		if(bool) {
 			result.put("result", "success");
+			result.put("result_code", 200);
 		} else {
 			result.put("result", "failure");
 		}
@@ -109,15 +113,22 @@ public class Lesson06Quiz03Controller {
 	public Map<String, Object> searchBooking(
 			@RequestParam("name") String name,
 			@RequestParam("phoneNumber") String phoneNumber){
-		Booking booking = bookingBO.getBooking(name,phoneNumber);
+//		Booking booking = bookingBO.getBooking(name,phoneNumber);
+		Booking booking = bookingBO.getLastBookingByNameAndPhoneNumber(name,phoneNumber);
+		
 		
 		Map<String, Object> result = new HashMap<>();
 		if(booking != null) {
 			result.put("result", "success");
-			result.put("date", booking.getDate());
-			result.put("headcount", booking.getHeadcount());
-			result.put("day", booking.getDay());
-			result.put("state", booking.getState());
+			
+			// method 1
+//			result.put("date", booking.getDate());
+//			result.put("headcount", booking.getHeadcount());
+//			result.put("day", booking.getDay());
+//			result.put("state", booking.getState());
+			
+			// method 2
+			result.put("booking", booking);
 		} else {
 			result.put("result", "failure");
 		}
